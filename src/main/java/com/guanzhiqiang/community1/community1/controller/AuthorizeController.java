@@ -29,8 +29,11 @@ public class AuthorizeController {
         accessTokenDTO.setState(state);
         accessTokenDTO.setClient_id("19fa57cea0d4660afb5d");
         accessTokenDTO.setClient_secret("0f2c75332b7e2b129dabe5b082ff3ccaefc7ebbb");
+        System.out.println("accessTokenDTO====" +accessTokenDTO.toString());
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
-        GithubUser user = githubProvider.getUser(accessToken);
+        System.out.println("accessToken===" + accessToken);
+        GithubUser user = githubProvider.getUser(accessToken);//这里你确定是用accessToken来获取用户信息？？？
+        System.out.println("user======" +user.toString());
         System.out.println(user.getName());
         return "index";
     }
