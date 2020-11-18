@@ -43,7 +43,7 @@ public class GithubProvider {
 
     //Authorization: token OAUTH-TOKEN
     //GET https://api.github.com/user
-    //上面这两行就是下面这些，对吧？ 对 就是携带token去  https://api.github.com/user  get请求用户信息
+
     public GithubUser getUser(String accessToken) {
         OkHttpClient client = new OkHttpClient();
         final String credential = Credentials.basic("access_token",accessToken);
