@@ -22,16 +22,15 @@ public class GithubProvider {
     public String getAccessToken(AccessTokenDTO accessTokenDTO) {
 
         OkHttpClient client = new OkHttpClient();
-        //JSON.toJSONString() 这个要做什么  把这个DTO转化成
-        System.out.println("JSON.toJSONString======" + JSON.toJSONString(accessTokenDTO));
-        RequestBody body = RequestBody.create(JSON.toJSONString(accessTokenDTO), mediaType);//这块？？对 就是 是不是获取到值了 但是回来解析的不对 accessTokenDTO解析有问题？ 你说的这个对是这个意思
+//        System.out.println("JSON.toJSONString======" + JSON.toJSONString(accessTokenDTO));
+        RequestBody body = RequestBody.create(JSON.toJSONString(accessTokenDTO), mediaType);
         Request request = new Request.Builder()
                 .url("https://github.com/login/oauth/access_token")
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
-            System.out.println("string===============" + string);//这个是？？？？我想打印一下这个string  因为这个返回的是一个字符串 带着token 啊 我给你看一下官方给的文档
+//            System.out.println("string===============" + string);
             String token = string.split("&")[0].split("=")[1];
             System.out.println("token================" + token);
             return token;
@@ -41,10 +40,12 @@ public class GithubProvider {
         return null;
     }
 
-    //Authorization: token OAUTH-TOKEN
-    //GET https://api.github.com/user
+
 
     public GithubUser getUser(String accessToken) {
+        //Authorization: token OAUTH-TOKEN
+        //GET https://api.github.com/user
+
         OkHttpClient client = new OkHttpClient();
         final String credential = Credentials.basic("access_token",accessToken);
         Request request = new Request.Builder()
